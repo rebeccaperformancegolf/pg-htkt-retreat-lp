@@ -1,33 +1,42 @@
 # Performance Retreat — Corporate High-Ticket Landing Page
 
-Single-file, zero-build landing page. Drops into a GitHub repo and deploys to Vercel as a static site (same workflow as the dashboard).
+Zero-build static landing page on the real Performance Golf brand system. Deploys to Vercel like the dashboard.
+
+## Repo structure — upload ALL of this (not just index.html)
+
+```
+index.html
+assets/
+  fonts/   ABCRepro-{Regular,Medium,Bold}.woff2, ABCReproMono-Regular.woff2, GT-Super-Text-Book{,-Italic}.woff2
+  logos/   combination-white.png, symbol-orange.png  (+ black/white variants, all transparent)
+```
+
+The page references `assets/...` with relative paths, so the **assets folder must sit next to index.html** in the repo. In GitHub's "Upload files," drag the whole folder in together.
 
 ## Deploy
 
-1. Put `index.html` at the repo root (rename to `index.html` if needed — Vercel serves it at `/`).
-2. Push to GitHub → import the repo in Vercel → deploy. No framework, no build command needed.
-3. (Optional) Add a custom domain / subdomain in Vercel, e.g. `retreats.performancegolf.com`.
+1. Put `index.html` + `assets/` at the repo root → push to `pg-htkt-retreat-lp`.
+2. Import as a new Vercel project (Framework: Other, no build command).
+3. Point your domain/subdomain at it.
+
+## Brand system (already wired)
+
+- **Fonts:** Repro (primary), Repro Mono (technical labels/eyebrows/buttons), GT Super (serif, used only for the testimonial quote). Self-hosted from `assets/fonts`.
+- **Colors:** Performance Orange `#FF3D00`, warm black `#1D1A1A`, warm grays (Stone/Pebble/Sand/Fog/Mist). All in `:root` as variables.
+- **WCAG rule honored:** Performance Orange always pairs with **black** text — so every orange button/section uses black text, per the brand's text-combination guidance.
+- **Logos:** transparent PNGs generated from the brand files. White lockup on dark sections, black on light, orange symbol as favicon. Source files are licensed (Repro/GT Super = Grilli Type) — fine to self-host, don't redistribute.
 
 ## Before launch — swap these placeholders
 
-Everything you need to change is grouped and labeled in the file.
+1. **OnceHub link** — `--oncehub-url` in `:root`. CTAs auto-append captured UTMs/click-IDs. To embed the scheduler in-page instead of linking out, paste the OnceHub snippet into `<div id="oncehub-embed">`.
+2. **Tracking** — `TRACKING PLACEHOLDERS` block in `<head>`: Meta Pixel, Microsoft UET, optional GTM.
+3. **Content** — search `[ ` for copy/proof to fill (coach names/bios, testimonial, stats) and the `data-label` image blocks for photos.
+4. **Vidalytics** — already embedded in the hero. No action.
 
-**1. Brand tokens** — top of `<style>`, under `BRAND TOKENS`. Replace the hex values and font names with the real Performance Golf brand-guide values. Change once, updates everywhere.
+## Attribution (built in)
 
-**2. OnceHub link** — in `:root`, the `--oncehub-url` variable. Replace the placeholder URL with your real OnceHub booking link. The CTA buttons auto-append captured UTMs/click-IDs to it (see below). If you'd rather embed the scheduler in-page than link out, paste the OnceHub embed snippet into `<div id="oncehub-embed">` near the bottom of the booking section.
+Captures `utm_*`, `fbclid`, `msclkid`, `gclid`, `li_fat_id`, persists for the session, and appends to the OnceHub link so Meta/Bing clicks carry attribution into HubSpot / High Ticket HQ. Map the same params into hidden HubSpot fields when you wire the form.
 
-**3. Tracking** — head of the document, under `TRACKING PLACEHOLDERS`. Paste your Meta Pixel, Microsoft UET, and (optional) GTM snippets.
+## Note on the in-chat preview
 
-**4. Vidalytics** — already wired into the hero with your embed code. No action needed.
-
-**5. Content placeholders** — search the file for `[ ` (bracketed text) and the image blocks (`data-label="..."`). These mark every spot needing real copy, coach names/bios, resort photos, testimonials, client logos, and stats.
-
-## Attribution (already built in)
-
-On page load, the script captures `utm_source/medium/campaign/term/content/id`, plus `fbclid`, `msclkid`, `gclid`, and `li_fat_id` from the URL, persists them for the session, and appends them to the OnceHub booking link. That way Meta/Bing clicks carry their attribution into the booking → HubSpot, so these corporate leads land clean in High Ticket HQ instead of needing reconciliation later. When you wire HubSpot, map those same params into hidden form fields for a complete chain.
-
-## Notes
-
-- Mobile-first and responsive; respects reduced-motion; keyboard-focus styles included.
-- FAQ uses native `<details>` — no JS dependency.
-- Hook copy on the page mirrors the winning ad angle (anti-offsite / "the offsite they actually remember") for scent match. The business-case section adds the ROI language the ads leave out — fill in real numbers or swap for outcome statements.
+The chat preview renders index.html alone, so the brand fonts and logos (separate files in `assets/`) may not appear there and it'll fall back to system fonts. That's expected — it renders correctly once the whole folder is in the repo and deployed.
