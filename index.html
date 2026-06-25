@@ -145,7 +145,8 @@ p{margin:0 0 1em}
   font-size:clamp(16px,2vw,21px);color:var(--stone);display:flex;gap:.7em;align-items:baseline}
 .fromto .from::before{content:"✕";color:var(--stone);font-size:.8em}
 .fromto .to{font-family:var(--font-sans);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;
-  font-size:clamp(17px,2.2vw,23px);color:var(--mist)}
+  font-size:clamp(17px,2.2vw,23px);color:var(--mist);display:flex;gap:.55em;align-items:baseline}
+.fromto .to::before{content:"✓";color:var(--orange);font-size:.82em;flex:0 0 auto}
 .fromto-key{display:flex;gap:28px;margin-bottom:8px}
 .fromto-key span{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
 .fromto-key span.k-to{color:var(--orange)}
@@ -157,6 +158,8 @@ p{margin:0 0 1em}
 .ph::after{content:attr(data-label);font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
   text-transform:uppercase;color:rgba(244,242,240,.55);padding:18px;max-width:78%}
 .ph.r43{aspect-ratio:4/3}.ph.r11{aspect-ratio:1/1}.ph.r32{aspect-ratio:3/2}.ph.r169{aspect-ratio:16/9}
+.hero-ph{border:1px solid rgba(255,61,0,.28);box-shadow:0 40px 90px -50px rgba(0,0,0,.9)}
+@media(min-width:960px){.hero-ph{aspect-ratio:auto;min-height:420px;height:100%}}
 
 /* ---------- offer ---------- */
 .offer .grid{display:grid;gap:clamp(32px,5vw,64px);align-items:center}
@@ -281,21 +284,10 @@ p{margin:0 0 1em}
         </div>
       </div>
       <div class="reveal">
-        <div class="video-frame">
-          <div class="vlabel">Watch — 2 min overview</div>
-          <div id="vidalytics_embed_1OmyQN6aLgNrVMvm" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
-          <script type="text/javascript">
-          (function (v, i, d, a, l, y, t, c, s) {
-              y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
-              if (!vsl){vsl=function(u,cb){
-                  if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
-                  if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
-                  i.getElementsByTagName("head")[0].appendChild(s);
-              };}
-              vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-          })(window, document, 'Vidalytics', 'vidalytics_embed_1OmyQN6aLgNrVMvm', 'https://fast.vidalytics.com/embeds/d14cTYqV/1OmyQN6aLgNrVMvm/');
-          </script>
-        </div>
+        <!-- HERO IMAGE: swap the <div class="ph"> for <img src="assets/photos/hero.jpg" alt="..."> when ready.
+             Brief: wide, quiet, aspirational — empty signature hole at golden hour, clubhouse exterior,
+             or a small foursome walking the fairway shot from distance. Landscape, warm light, no text. -->
+        <div class="ph r43 hero-ph" data-label="Resort hero — signature hole at golden hour"></div>
       </div>
     </div>
   </section>
